@@ -18,7 +18,7 @@ class OwnerController extends Controller
      */
     public function create()
     {
-        return view('create');
+        return view('owers/create');
     }
 
     /**

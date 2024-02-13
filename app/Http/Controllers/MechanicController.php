@@ -10,7 +10,7 @@ class MechanicController extends Controller
     public function index()
     {
         $mechanics = Mechanic::all();
-        return view('index', ['mechanics' => $mechanics]);
+        return view('mechanics.index', ['mechanics' => $mechanics]);
     }
 
     /**
@@ -18,7 +18,7 @@ class MechanicController extends Controller
      */
     public function create()
     {
-        return view('create');
+        return view('mechanics/create');
     }
 
     /**

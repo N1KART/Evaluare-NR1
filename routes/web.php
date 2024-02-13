@@ -14,18 +14,18 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-Route::redirect('/', '/users');
-Route::get( '/users' , [CarController::class, 'index']) ->name('cars.index');
-Route::get('/users/create' , [CarController::class , 'create']) ->name('cars.create');
-Route::post('/users' , [CarController::class , 'store'])->name('cars.store');
+Route::redirect('/', '/cars');
+Route::get( '/cars' , [CarController::class, 'index']) ->name('cars.index');
+Route::get('/cars/create' , [CarController::class , 'create']) ->name('cars.create');
+Route::post('/cars' , [CarController::class , 'store'])->name('cars.store');
 
-Route::get( '/users' , [OwnerController::class, 'index']) ->name('owners.index');
-Route::get('/users/create' , [OwnerController::class , 'create']) ->name('owners.create');
-Route::post('/users' , [OwnerController::class , 'store'])->name('owners.store');
+Route::get( '/owners' , [OwnerController::class, 'index']) ->name('owners.index');
+Route::get('/owners/create' , [OwnerController::class , 'create']) ->name('owners.create');
+Route::post('/owners' , [OwnerController::class , 'store'])->name('owners.store');
 
-Route::get( '/users' , [MechanicController::class, 'index']) ->name('mechanics.index');
-Route::get('/users/create' , [MechanicController::class , 'create']) ->name('mechanics.create');
-Route::post('/users' , [MechanicController::class , 'store'])->name('mechanics.store');
+Route::get( '/mechanics' , [MechanicController::class, 'index']) ->name('mechanics.index');
+Route::get('/mechanics/create' , [MechanicController::class , 'create']) ->name('mechanics.create');
+Route::post('/mechanics' , [MechanicController::class , 'store'])->name('mechanics.store');
 
 Route::controller(CarController::class)->group(function(){
     Route::get('cars', 'index')->name('cars.index');
