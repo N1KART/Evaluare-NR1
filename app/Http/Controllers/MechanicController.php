@@ -20,10 +20,14 @@ class MechanicController extends Controller
     {
         return view('mechanics/create');
     }
+    public function store(Request $request)
+    {
+        Mechanic::create($request->all());
+        return redirect()
+            ->route('mechanics.index')
+            ->with('succes', 'Mehanicul a fost adaugat cu succes');
+    }
 
-    /**
-     * Store a newly created resource in storage.
-     */
 
     public function update(Request $request, Mechanic $mechanic)
     {

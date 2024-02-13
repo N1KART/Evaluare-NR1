@@ -21,9 +21,14 @@ class OwnerController extends Controller
         return view('owners/create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+    public function store(Request $request)
+    {
+        Owner::create($request->all());
+        return redirect()
+            ->route('ownerss.index')
+            ->with('succes', 'Proprietarul a fost adaugat cu succes');
+    }
+    
     public function update(Request $request, Owner $owner)
     {
         $validated = $request->validate([

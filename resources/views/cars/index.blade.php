@@ -3,7 +3,7 @@
 @section('title','content')
 
 @section('content')
-    <h4>Lista de contacte</h4>
+    <h4>Lista de Automobile</h4>
     <a href="{{ route('cars.create')}}">Adauga</a>
     <hr>
     @if (session('success'))

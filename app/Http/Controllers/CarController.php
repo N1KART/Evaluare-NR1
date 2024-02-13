@@ -14,20 +14,19 @@ class CarController extends Controller
         return view('cars.index', ['cars' => $cars]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         return view('cars/create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    /**
-     * Update the specified resource in storage.
-     */
+    public function store(Request $request)
+    {
+        Car::create($request->all());
+        return redirect()
+            ->route('cars.index')
+            ->with('succes', 'Masina a fost adaugat cu succes');
+    }
+    
     public function update(Request $request, Car $car)
     {
         $validated = $request->validate([
