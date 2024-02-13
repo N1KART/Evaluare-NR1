@@ -10,7 +10,7 @@ class OwnerController extends Controller
     public function index()
     {
         $owners = Owner::all();
-        return view('index', ['owners' => $owners]);
+        return view('owners.index', ['owners' => $owners]);
     }
 
     /**
@@ -18,7 +18,7 @@ class OwnerController extends Controller
      */
     public function create()
     {
-        return view('owers/create');
+        return view('owners/create');
     }
 
     /**
