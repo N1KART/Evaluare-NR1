@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Owner extends Model
 {
@@ -14,7 +14,8 @@ class Owner extends Model
         'name',
         'car_id'
     ];
-    public function user():BelongsTo {
-        return $this->belongsTo(Car::class);}
-    
+    public function cars(): HasMany
+    {
+        return $this->hasMany(Car::class);
+    }
 }

@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+
 
 class Mechanic extends Model
 {
@@ -12,4 +14,8 @@ class Mechanic extends Model
         'id',
         'name'
     ];
+    public function car(): BelongsTo
+    {
+        return $this->belongsTo(Car::class);
+    }
 }
