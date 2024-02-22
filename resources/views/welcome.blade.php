@@ -17,19 +17,79 @@
     </head>
     <body class="antialiased">
         <div class="relative sm:flex sm:justify-center sm:items-center min-h-screen bg-dots-darker bg-center bg-gray-100 dark:bg-dots-lighter dark:bg-gray-900 selection:bg-red-500 selection:text-white">
-            @if (Route::has('login'))
-                <div class="sm:fixed sm:top-0 sm:right-0 p-6 text-right z-10">
-                    @auth
-                        <a href="{{ url('/home') }}" class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Home</a>
-                    @else
-                        <a href="{{ route('login') }}" class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Log in</a>
+            <!-- resources/views/cars/index.blade.php -->
 
-                        @if (Route::has('register'))
-                            <a href="{{ route('register') }}" class="ml-4 font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Register</a>
-                        @endif
-                    @endauth
-                </div>
+@extends('layouts.app')
+
+@section('content')
+    <div class="container">
+        <h2>Lista de Mașini</h2>
+        <a href="{{ route('cars.create') }}" class="btn btn-primary mb-3">Adaugă Mașină Nouă</a>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Brand</th>
+                    <th>Model</th>
+                    <th>An</th>
+                    <th>Culoare</th>
+                    <th>Acțiuni</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($cars as $car)
+                    <tr>
+                        <td>{{ $car->id }}</td>
+                        <td>{{ $car->brand }}</td>
+                        <td>{{ $car->model }}</td>
+                        <td>{{ $car->year }}</td>
+                        <td>{{ $car->color }}</td>
+                        <td>
+                            <a href="{{ route('cars.show', $car) }}" class="btn btn-info btn-sm">Vizualizare</a>
+                            <a href="{{ route('cars.edit', $car) }}" class="btn btn-primary btn-sm">Editare</a>
+                            <form action="{{ route('cars.destroy', $car) }}" method="POST" style="display: inline;">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Sigur dorești să ștergi această mașină?')">Ștergere</button>
+                            </form>
+                        </td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
+@endsection
+
+@extends('layouts.app')
+
+@section('content')
+    <div class="container">
+        <h2>{{ isset($car) ? 'Editează Mașină' : 'Adaugă Mașină Nouă' }}</h2>
+        <form action="{{ isset($car) ? route('cars.update', $car) : route('cars.store') }}" method="POST">
+            @csrf
+            @if(isset($car))
+                @method('PUT')
             @endif
+            <div class="form-group">
+                <label for="brand">Brand:</label>
+                <input type="text" class="form-control" id="brand" name="brand" value="{{ isset($car) ? $car->brand : '' }}">
+            </div>
+            <div class="form-group">
+                <label for="model">Model:</label>
+                <input type="text" class="form-control" id="model" name="model" value="{{ isset($car) ? $car->model : '' }}">
+            </div>
+            <div class="form-group">
+                <label for="year">An:</label>
+                <input type="text" class="form-control" id="year" name="year" value="{{ isset($car) ? $car->year : '' }}">
+            </div>
+            <div class="form-group">
+                <label for="color">Culoare:</label>
+                <input type="text" class="form-control" id="color" name="color" value="{{ isset($car) ? $car->color : '' }}">
+            </div>
+            <button type="submit" class="btn btn-primary">{{ isset($car) ? 'Actualizează' : 'Salvează' }}</button>
+        </form>
+    </div>
+@endsection
 
             <div class="max-w-7xl mx-auto p-6 lg:p-8">
                 <div class="flex justify-center">
